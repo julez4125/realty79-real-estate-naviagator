@@ -1,0 +1,31 @@
+{
+  "name": "@org/web-vue-e2e",
+  "version": "0.0.1",
+  "private": true,
+  "devDependencies": {
+    "@playwright/test": "^1.44.0"
+  },
+  "nx": {
+    "name": "web-vue-e2e",
+    "implicitDependencies": [
+      "web-vue"
+    ],
+    "targets": {
+      "e2e": {
+        "executor": "@nx/playwright:playwright",
+        "outputs": [
+          "{projectRoot}/test-output"
+        ],
+        "options": {
+          "config": "apps/web-vue-e2e/playwright.config.ts"
+        },
+        "dependsOn": [
+          "web-vue:serve"
+        ]
+      }
+    },
+    "tags": [
+      "scope:e2e"
+    ]
+  }
+}

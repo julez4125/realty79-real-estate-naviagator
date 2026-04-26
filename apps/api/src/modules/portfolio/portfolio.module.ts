@@ -1,8 +1,10 @@
 import { Module } from '@nestjs/common';
+import { PortfolioController } from './portfolio.controller';
+import { PortfolioService } from './portfolio.service';
 
-/**
- * PortfolioModule — scaffold (M0). Real wiring lands in subsequent milestones per
- * /opt/realty79-real-estate-naviagator/.omc/plans/realty79-scout-mvp-consensus-iter2.md
- */
-@Module({})
+@Module({
+  controllers: [PortfolioController],
+  providers: [PortfolioService],
+  exports: [PortfolioService],
+})
 export class PortfolioModule {}
