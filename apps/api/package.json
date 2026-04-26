@@ -76,7 +76,10 @@
           }
         }
       }
-    }
+    },
+    "tags": [
+      "scope:api"
+    ]
   },
   "dependencies": {
     "@nestjs/common": "^11.0.0",

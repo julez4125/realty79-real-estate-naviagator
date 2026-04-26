@@ -3,13 +3,13 @@ import {
   projectCashflow,
   calculateKeyMetrics,
   quickCashflow,
-} from './immocation-calculator';
+} from './immocation-calculator.js';
 import {
   PropertyInput,
   FinancingParams,
   DEFAULT_FINANCING,
   DEFAULT_ASSUMPTIONS,
-} from '../interfaces/calculator.interfaces';
+} from '../interfaces/calculator.interfaces.js';
 
 // ════════════════════════════════════════════════════════════════
 // Testdaten: Bad Bellingen MFH (aus immocation Excel Cockpit)

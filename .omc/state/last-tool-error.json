@@ -1,7 +1,0 @@
-{
-  "tool_name": "Read",
-  "tool_input_preview": "{\"file_path\":\"/opt/realty79-real-estate-naviagator/.omc/plans/realty79-scout-mvp-consensus-iter2.md\"}",
-  "error": "File content (53234 tokens) exceeds maximum allowed tokens (25000). Use offset and limit parameters to read specific portions of the file, or search for specific content instead of reading the whole file.",
-  "timestamp": "2026-04-26T11:42:36.380Z",
-  "retry_count": 1
-}

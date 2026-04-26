@@ -17,8 +17,36 @@ export default [
           allow: ['^.*/eslint(\\.base)?\\.config\\.[cm]?[jt]s$'],
           depConstraints: [
             {
-              sourceTag: '*',
-              onlyDependOnLibsWithTags: ['*'],
+              sourceTag: 'scope:api',
+              onlyDependOnLibsWithTags: ['scope:shared', 'scope:agent-tools'],
+            },
+            {
+              sourceTag: 'scope:worker',
+              onlyDependOnLibsWithTags: [
+                'scope:shared',
+                'scope:integrations',
+                'scope:agent-tools',
+              ],
+            },
+            {
+              sourceTag: 'scope:agent-tools',
+              onlyDependOnLibsWithTags: ['scope:integrations', 'scope:shared'],
+            },
+            {
+              sourceTag: 'scope:integrations',
+              onlyDependOnLibsWithTags: ['scope:integrations', 'scope:shared'],
+            },
+            {
+              sourceTag: 'scope:web',
+              onlyDependOnLibsWithTags: ['scope:shared'],
+            },
+            {
+              sourceTag: 'scope:shared',
+              onlyDependOnLibsWithTags: ['scope:shared'],
+            },
+            {
+              sourceTag: 'scope:e2e',
+              onlyDependOnLibsWithTags: ['scope:shared', 'scope:api'],
             },
           ],
         },

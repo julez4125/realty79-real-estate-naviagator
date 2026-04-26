@@ -13,7 +13,25 @@
       "path": "./libs/shared"
     },
     {
-      "path": "./apps/web"
+      "path": "./libs/integrations/immometrica"
+    },
+    {
+      "path": "./libs/integrations/standort"
+    },
+    {
+      "path": "./libs/integrations/scraper"
+    },
+    {
+      "path": "./libs/integrations/mailer"
+    },
+    {
+      "path": "./libs/integrations/proxy"
+    },
+    {
+      "path": "./libs/integrations/llm"
+    },
+    {
+      "path": "./libs/agent-tools"
     }
   ]
 }

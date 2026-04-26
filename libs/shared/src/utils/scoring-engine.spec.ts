@@ -1,6 +1,6 @@
-import { evaluatePhase1, evaluatePhase2, calculateOverallScore } from './scoring-engine';
-import { PropertyInput } from '../interfaces/calculator.interfaces';
-import { DEFAULT_PIPELINE, DEFAULT_PHASE1, DEFAULT_PHASE2 } from '../interfaces/pipeline.interfaces';
+import { evaluatePhase1, evaluatePhase2, calculateOverallScore } from './scoring-engine.js';
+import { PropertyInput } from '../interfaces/calculator.interfaces.js';
+import { DEFAULT_PIPELINE, DEFAULT_PHASE1, DEFAULT_PHASE2 } from '../interfaces/pipeline.interfaces.js';
 
 const goodProperty: PropertyInput = {
   kaufpreis: 150_000,

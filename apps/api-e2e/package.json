@@ -22,6 +22,9 @@
           "api:serve"
         ]
       }
-    }
+    },
+    "tags": [
+      "scope:e2e"
+    ]
   }
 }

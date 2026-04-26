@@ -1,6 +1,6 @@
-import { runPhase1, runPhase2, getPhase2Passed, analyzeProperty, PipelineProperty } from './pipeline-filter';
-import { PropertyInput } from '../interfaces/calculator.interfaces';
-import { DEFAULT_PIPELINE } from '../interfaces/pipeline.interfaces';
+import { runPhase1, runPhase2, getPhase2Passed, analyzeProperty, PipelineProperty } from './pipeline-filter.js';
+import { PropertyInput } from '../interfaces/calculator.interfaces.js';
+import { DEFAULT_PIPELINE } from '../interfaces/pipeline.interfaces.js';
 
 const properties: PipelineProperty[] = [
   {
@@ -75,7 +75,7 @@ describe('runPhase2', () => {
     const p1 = runPhase1(properties);
     const potenziale = new Map([['good-1', 10], ['good-2', 5]]);
     const p2 = runPhase2(p1, DEFAULT_PIPELINE, potenziale);
-    const good1 = p2.find(r => r.property.externalId === 'good-1');
+    const good1 = p2.find((r: { property: { externalId?: string } }) => r.property.externalId === 'good-1');
     expect(good1?.phase2?.checks.mietpotenzial.value).toBe(10);
   });
 });

@@ -1,0 +1,16 @@
+packages:
+  - 'apps/*'
+  - 'libs/*'
+  - 'libs/integrations/*'
+  - 'packages/*'
+
+onlyBuiltDependencies:
+  - '@nestjs/core'
+  - '@prisma/engines'
+  - '@swc/core'
+  - esbuild
+  - msgpackr-extract
+  - nx
+  - prisma
+  - unrs-resolver
+  - vue-demi

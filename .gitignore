@@ -58,3 +58,9 @@ __screenshots__/
 test-output
 
 /generated/prisma
+
+# OMC session state (per-session, do not commit)
+.omc/state/
+.omc/sessions/
+.omc/drafts/
+.omc/cache/
