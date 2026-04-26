@@ -1,0 +1,24 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "web",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["nx", "serve", "web"],
+      "port": 4200
+    },
+    {
+      "name": "web-vue",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["vite", "--port", "4300"],
+      "port": 4300,
+      "cwd": "apps/web-vue"
+    },
+    {
+      "name": "api",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["nx", "serve", "api"],
+      "port": 3000
+    }
+  ]
+}

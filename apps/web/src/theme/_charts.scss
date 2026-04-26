@@ -1,0 +1,48 @@
+// ApexCharts theme integration
+.apexcharts-canvas {
+  font-family: var(--r79-font-family) !important;
+}
+
+.apexcharts-tooltip {
+  font-family: var(--r79-font-family) !important;
+  border-radius: var(--r79-radius-sm) !important;
+  box-shadow: var(--r79-shadow-lg) !important;
+  border: 1px solid var(--r79-border) !important;
+}
+
+.apexcharts-tooltip-title {
+  font-weight: var(--r79-font-weight-semibold) !important;
+  font-size: var(--r79-font-size-xs) !important;
+  background: var(--r79-bg-surface-alt) !important;
+  border-bottom-color: var(--r79-border) !important;
+}
+
+.apexcharts-tooltip-text {
+  font-size: var(--r79-font-size-xs) !important;
+}
+
+.apexcharts-legend-text {
+  font-family: var(--r79-font-family) !important;
+  font-size: var(--r79-font-size-xs) !important;
+  color: var(--r79-text-secondary) !important;
+}
+
+.apexcharts-xaxis-label, .apexcharts-yaxis-label {
+  font-family: var(--r79-font-family) !important;
+}
+
+.apexcharts-gridline {
+  stroke: var(--r79-border-subtle);
+}
+
+// Chart card wrapper
+.r79-chart-container {
+  width: 100%;
+  min-height: 280px;
+  position: relative;
+
+  apx-chart {
+    display: block;
+    width: 100%;
+  }
+}

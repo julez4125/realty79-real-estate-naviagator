@@ -1,0 +1,96 @@
+:root {
+  // Brand
+  --r79-primary: #1a56db;
+  --r79-primary-hover: #1648b8;
+  --r79-primary-light: #dbeafe;
+  --r79-accent: #7c3aed;
+  --r79-accent-light: #ede9fe;
+  --r79-accent-hover: #6d28d9;
+
+  // Semantic
+  --r79-positive: #10b981;
+  --r79-positive-light: #d1fae5;
+  --r79-negative: #ef4444;
+  --r79-negative-light: #fee2e2;
+  --r79-warning: #f59e0b;
+  --r79-warning-light: #fef3c7;
+  --r79-info: #3b82f6;
+  --r79-info-light: #dbeafe;
+
+  // Neutrals
+  --r79-bg-page: #f8fafc;
+  --r79-bg-surface: #ffffff;
+  --r79-bg-surface-hover: #f1f5f9;
+  --r79-bg-surface-alt: #f8fafc;
+  --r79-bg-sidebar: #0f172a;
+  --r79-bg-sidebar-hover: #1e293b;
+  --r79-bg-sidebar-active: #1e293b;
+
+  --r79-text-primary: #0f172a;
+  --r79-text-secondary: #64748b;
+  --r79-text-tertiary: #94a3b8;
+  --r79-text-on-dark: #f8fafc;
+  --r79-text-on-primary: #ffffff;
+
+  --r79-border: #e2e8f0;
+  --r79-border-subtle: #f1f5f9;
+  --r79-border-strong: #cbd5e1;
+
+  // Spacing (4px base)
+  --r79-space-xs: 4px;
+  --r79-space-sm: 8px;
+  --r79-space-md: 16px;
+  --r79-space-lg: 24px;
+  --r79-space-xl: 32px;
+  --r79-space-2xl: 48px;
+  --r79-space-3xl: 64px;
+
+  // Radius
+  --r79-radius-xs: 4px;
+  --r79-radius-sm: 6px;
+  --r79-radius-md: 10px;
+  --r79-radius-lg: 16px;
+  --r79-radius-xl: 24px;
+  --r79-radius-full: 9999px;
+
+  // Shadows
+  --r79-shadow-xs: 0 1px 2px rgba(0,0,0,0.04);
+  --r79-shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --r79-shadow-md: 0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -2px rgba(0,0,0,0.05);
+  --r79-shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.08), 0 4px 6px -4px rgba(0,0,0,0.04);
+  --r79-shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.08), 0 8px 10px -6px rgba(0,0,0,0.04);
+  --r79-shadow-glow-primary: 0 0 20px rgba(26, 86, 219, 0.15);
+  --r79-shadow-glow-positive: 0 0 12px rgba(16, 185, 129, 0.2);
+
+  // Typography
+  --r79-font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --r79-font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+  --r79-font-size-2xs: 0.6875rem;
+  --r79-font-size-xs: 0.75rem;
+  --r79-font-size-sm: 0.8125rem;
+  --r79-font-size-base: 0.875rem;
+  --r79-font-size-md: 1rem;
+  --r79-font-size-lg: 1.125rem;
+  --r79-font-size-xl: 1.25rem;
+  --r79-font-size-2xl: 1.5rem;
+  --r79-font-size-3xl: 2rem;
+  --r79-font-size-4xl: 2.5rem;
+  --r79-font-weight-normal: 400;
+  --r79-font-weight-medium: 500;
+  --r79-font-weight-semibold: 600;
+  --r79-font-weight-bold: 700;
+  --r79-line-height-tight: 1.25;
+  --r79-line-height-normal: 1.5;
+  --r79-line-height-relaxed: 1.75;
+
+  // Sidebar
+  --r79-sidebar-width: 256px;
+  --r79-sidebar-collapsed-width: 68px;
+  --r79-topbar-height: 56px;
+
+  // Transitions
+  --r79-transition-fast: 150ms ease;
+  --r79-transition-base: 200ms ease;
+  --r79-transition-slow: 300ms ease;
+  --r79-transition-spring: 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}

@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls -la /Users/julian/realty79/apps/*/src)",
+      "Bash(ls -la /Users/julian/realty79/apps/*/)",
+      "Bash(xargs ls:*)",
+      "Bash(/dev/null grep:*)",
+      "Bash(npx nx:*)",
+      "mcp__Claude_Preview__preview_start"
+    ]
+  }
+}

@@ -1,0 +1,105 @@
+@import './variables.scss';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://cdn.jsdelivr.net/npm/@mdi/font@7/css/materialdesignicons.min.css');
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  --va-font-family: 'Inter', sans-serif;
+  --va-card-box-shadow: none;
+  --va-card-padding: 1rem;
+}
+
+#app {
+  height: 100%;
+}
+
+.page-title {
+  @apply text-[28px] md:text-4xl font-bold leading-9 md:leading-[48px] mb-4;
+}
+
+// Prevent sidebar icon jump on animation
+.va-sidebar {
+  width: unset !important;
+  min-width: unset !important;
+}
+
+// Accessible focus indicators — keyboard-only (`:focus-visible`)
+// Scoped to interactive elements so decorative elements stay clean.
+a,
+button,
+input,
+select,
+textarea,
+[tabindex],
+[role="button"] {
+  &:focus-visible {
+    outline: 2px solid var(--va-primary);
+    outline-offset: 2px;
+    border-radius: 0.5rem;
+  }
+
+  // Remove default outline when using mouse (only show for keyboard)
+  &:focus:not(:focus-visible) {
+    outline: none;
+  }
+}
+
+// Skip-link for keyboard navigation
+// Visually hidden by default; slides into view on focus for keyboard users.
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--va-primary);
+  color: #ffffff;
+  padding: 12px 24px;
+  border-radius: 0.5rem;
+  z-index: 10000;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+
+  &:focus,
+  &:focus-visible {
+    position: fixed;
+    left: 16px;
+    top: 8px;
+    outline: 2px solid var(--va-primary);
+    outline-offset: 2px;
+  }
+}
+
+// Custom scrollbar
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--va-background-border);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--va-secondary);
+}

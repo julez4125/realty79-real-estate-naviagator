@@ -1,0 +1,480 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ═══════════════════════════════════════════
+// SCOUT — Objekte finden & bewerten
+// ═══════════════════════════════════════════
+
+model Property {
+  id              String   @id @default(cuid())
+  externalId      String?  @unique
+  source          String
+  sourceUrl       String?
+
+  ort             String
+  plz             String
+  strasse         String?
+  bundesland      String?
+  wohnflaeche     Float
+  grundstueck     Float?
+  zimmer          Float
+  baujahr         Int?
+  wohnungstyp     String?
+  objektzustand   String?
+  heizung         String?
+  energieausweis  String?
+
+  kaufpreis       Float
+  preisProQm      Float
+  hausgeld        Float?
+  grundsteuer     Float?
+
+  kaltmieteIst    Float?
+  kaltmieteSoll   Float?
+
+  roiSoll         Float?
+  roiIst          Float?
+  cashflowIM      Float?
+  marktwert       Float?
+  preisAbweichung Float?
+  trend           String?
+  bodenrichtwert  Float?
+
+  phase           Int      @default(1)
+  phase1Passed    Boolean?
+  phase2Passed    Boolean?
+  phase3Passed    Boolean?
+  score           Float?
+  recommendation  String?
+
+  isNew           Boolean  @default(true)
+  isFavorite      Boolean  @default(false)
+  isHidden        Boolean  @default(false)
+  isOwned         Boolean  @default(false)
+
+  analysis        Analysis?
+  deepResearch    DeepResearch?
+  photos          PropertyPhoto[]
+  scenarios       Scenario[]
+  units           Unit[]
+  documents       Document[]
+  expenses        Expense[]
+  maintenanceTasks MaintenanceTask[]
+
+  notes           String?
+  searchId        String?
+  search          SavedSearch? @relation(fields: [searchId], references: [id])
+  portfolioId     String?
+  portfolio       Portfolio? @relation(fields: [portfolioId], references: [id])
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([plz])
+  @@index([phase])
+  @@index([score])
+  @@index([isNew])
+  @@index([isFavorite])
+}
+
+model Analysis {
+  id                    String   @id @default(cuid())
+  propertyId            String   @unique
+  property              Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  kaufnebenkosten       Float
+  gesamtinvestition     Float
+  eigenkapital          Float
+  bruttomietrendite     Float
+  nettomietrendite      Float
+  kaufpreisfaktor       Float
+  eigenkapitalrendite   Float
+  cashflowOperativ      Float
+  cashflowNachSteuern   Float
+  breakEvenJahr         Int?
+  breakEvenKumCf        Int?
+  darlehensSumme        Float
+  zinsenMonat           Float
+  tilgungMonat          Float
+  restschuldJahr10      Float?
+  volltilgungJahr       Int?
+  vermoegenszuwachs     Float?
+  beleihungsreserve     Float?
+  cashflowProjektion    Json
+  annahmen              Json
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+}
+
+model DeepResearch {
+  id                    String   @id @default(cuid())
+  propertyId            String   @unique
+  property              Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  zustandScore          Float?
+  renovierungsbedarf    String?
+  sanierungskosten      Float?
+  erkannteProbleme      Json?
+  lageScore             Float?
+  infrastruktur         Json?
+  oepnvScore            Float?
+  einkaufScore          Float?
+  bevoelkerungstrend    String?
+  wirtschaftskraft      String?
+  arbeitslosenquote     Float?
+  miettrend5Jahre       Float?
+  hochwasserRisiko      String?
+  laermPegel            Float?
+  solarPotenzial        Float?
+  risikoScore           Float?
+  risikoDetails         Json?
+  aiAnalyse             String?
+  aiEmpfehlung          String?
+  angebotspreis         Float?
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+}
+
+model PropertyPhoto {
+  id              String   @id @default(cuid())
+  propertyId      String
+  property        Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  url             String
+  kategorie       String?
+  aiAnalysis      String?
+  createdAt       DateTime @default(now())
+}
+
+model Scenario {
+  id              String   @id @default(cuid())
+  propertyId      String
+  property        Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  name            String
+  params          Json
+  ergebnis        Json
+  createdAt       DateTime @default(now())
+}
+
+// ═══════════════════════════════════════════
+// VERWALTUNG
+// ═══════════════════════════════════════════
+
+model Unit {
+  id              String   @id @default(cuid())
+  propertyId      String
+  property        Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  bezeichnung     String
+  typ             String
+  flaeche         Float?
+  zimmer          Float?
+  stockwerk       Int?
+  leases          Lease[]
+  meters          Meter[]
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model Renter {
+  id              String   @id @default(cuid())
+  vorname         String
+  nachname        String
+  email           String?
+  telefon         String?
+  whatsapp        String?
+  leases          Lease[]
+  conversations   RenterConversation[]
+  tickets         MaintenanceTicket[]
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model Lease {
+  id              String   @id @default(cuid())
+  unitId          String
+  unit            Unit     @relation(fields: [unitId], references: [id], onDelete: Cascade)
+  renterId        String
+  renter          Renter   @relation(fields: [renterId], references: [id])
+  beginn          DateTime
+  ende            DateTime?
+  kuendigungsfrist Int     @default(3)
+  kaltmiete       Float
+  nebenkosten     Float
+  heizkosten      Float?
+  stellplatzMiete Float?
+  gesamtmiete     Float
+  staffelmiete    Json?
+  indexmiete      Boolean  @default(false)
+  kaution         Float?
+  kautionBezahlt  Boolean  @default(false)
+  status          String   @default("aktiv")
+  kuendigungAm    DateTime?
+  kuendigungVon   String?
+  payments        Payment[]
+  documents       Document[]
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  @@index([status])
+}
+
+model Payment {
+  id              String   @id @default(cuid())
+  leaseId         String
+  lease           Lease    @relation(fields: [leaseId], references: [id], onDelete: Cascade)
+  monat           DateTime
+  sollBetrag      Float
+  istBetrag       Float?
+  eingangAm       DateTime?
+  status          String   @default("offen")
+  mahnStufe       Int      @default(0)
+  notiz           String?
+  createdAt       DateTime @default(now())
+  @@index([status])
+  @@index([monat])
+}
+
+model Expense {
+  id              String   @id @default(cuid())
+  propertyId      String
+  property        Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  kategorie       String
+  beschreibung    String
+  betrag          Float
+  datum           DateTime
+  umlagefaehig    Boolean  @default(false)
+  belegPfad       String?
+  createdAt       DateTime @default(now())
+  @@index([propertyId, datum])
+}
+
+model Meter {
+  id              String   @id @default(cuid())
+  unitId          String
+  unit            Unit     @relation(fields: [unitId], references: [id], onDelete: Cascade)
+  typ             String
+  zaehlerNr       String?
+  readings        MeterReading[]
+  createdAt       DateTime @default(now())
+}
+
+model MeterReading {
+  id              String   @id @default(cuid())
+  meterId         String
+  meter           Meter    @relation(fields: [meterId], references: [id], onDelete: Cascade)
+  datum           DateTime
+  wert            Float
+  createdAt       DateTime @default(now())
+}
+
+// ═══════════════════════════════════════════
+// INSTANDHALTUNG
+// ═══════════════════════════════════════════
+
+model MaintenanceTask {
+  id              String   @id @default(cuid())
+  propertyId      String
+  property        Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  titel           String
+  beschreibung    String?
+  typ             String
+  prioritaet      String   @default("normal")
+  status          String   @default("offen")
+  faelligAm       DateTime?
+  wiederholung    String?
+  kosten          Float?
+  handwerkerId    String?
+  handwerker      Handwerker? @relation(fields: [handwerkerId], references: [id])
+  tickets         MaintenanceTicket[]
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  @@index([status])
+}
+
+model MaintenanceTicket {
+  id              String   @id @default(cuid())
+  taskId          String?
+  task            MaintenanceTask? @relation(fields: [taskId], references: [id])
+  renterId        String?
+  renter          Renter?  @relation(fields: [renterId], references: [id])
+  beschreibung    String
+  fotos           Json?
+  status          String   @default("neu")
+  aiSummary       String?
+  aiPrioritaet    String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model Handwerker {
+  id              String   @id @default(cuid())
+  name            String
+  gewerk          String
+  telefon         String?
+  email           String?
+  bewertung       Float?
+  tasks           MaintenanceTask[]
+  createdAt       DateTime @default(now())
+}
+
+// ═══════════════════════════════════════════
+// AI ASSIST & KOMMUNIKATION
+// ═══════════════════════════════════════════
+
+model RenterConversation {
+  id              String   @id @default(cuid())
+  renterId        String
+  renter          Renter   @relation(fields: [renterId], references: [id])
+  channel         String
+  externalId      String?
+  messages        RenterMessage[]
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model RenterMessage {
+  id              String   @id @default(cuid())
+  conversationId  String
+  conversation    RenterConversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  role            String
+  content         String
+  channel         String
+  metadata        Json?
+  needsReview     Boolean  @default(false)
+  createdAt       DateTime @default(now())
+}
+
+model AgentConversation {
+  id              String    @id @default(cuid())
+  channel         String
+  externalChatId  String?
+  messages        AgentMessage[]
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+}
+
+model AgentMessage {
+  id              String    @id @default(cuid())
+  conversationId  String
+  conversation    AgentConversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  role            String
+  content         String
+  metadata        Json?
+  createdAt       DateTime  @default(now())
+}
+
+// ═══════════════════════════════════════════
+// DOKUMENTE
+// ═══════════════════════════════════════════
+
+model Document {
+  id              String   @id @default(cuid())
+  propertyId      String?
+  property        Property? @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  leaseId         String?
+  lease           Lease?   @relation(fields: [leaseId], references: [id], onDelete: Cascade)
+  name            String
+  typ             String
+  kategorie       String
+  pfad            String
+  generiert       Boolean  @default(false)
+  createdAt       DateTime @default(now())
+}
+
+model DocumentTemplate {
+  id              String   @id @default(cuid())
+  name            String
+  typ             String
+  inhalt          String   @db.Text
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+// ═══════════════════════════════════════════
+// PORTFOLIO & KONFIGURATION
+// ═══════════════════════════════════════════
+
+model Portfolio {
+  id              String     @id @default(cuid())
+  name            String     @default("Mein Portfolio")
+  properties      Property[]
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+}
+
+model PipelineConfig {
+  id              String   @id @default(cuid())
+  name            String   @default("default")
+  p1MinRendite    Float    @default(5.0)
+  p1MaxFaktor     Float    @default(20.0)
+  p1MinCashflow   Float    @default(-200.0)
+  p1MaxPreisProQm Float    @default(4000.0)
+  p1MinBaujahr    Int      @default(1980)
+  p1MinWohnflaeche Float   @default(40.0)
+  p1Logic         String   @default("ALL")
+  p2MinCfNachSt   Float    @default(0.0)
+  p2MinEkRendite  Float    @default(5.0)
+  p2MaxBreakEven  Int      @default(10)
+  p2MinMietpotenzial Float @default(0.0)
+  p2MinNettoRendite Float  @default(3.0)
+  eigenkapitalQ   Float    @default(0.20)
+  zinssatz        Float    @default(0.03)
+  tilgung         Float    @default(0.02)
+  mietsteigerung  Float    @default(0.03)
+  kostensteigerung Float   @default(0.02)
+  wertsteigerung  Float    @default(0.02)
+  grenzsteuersatz Float    @default(0.42)
+  afaSatz         Float    @default(0.02)
+  gebaeudeAnteil  Float    @default(0.75)
+  instandhaltung  Float    @default(5.0)
+  mietausfall     Float    @default(0.03)
+  makler          Float    @default(0.0357)
+  notar           Float    @default(0.015)
+  grundbuch       Float    @default(0.005)
+  grunderwerbst   Float    @default(0.05)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model SavedSearch {
+  id              String     @id @default(cuid())
+  name            String
+  immoMetricaId   String?
+  filters         Json
+  isActive        Boolean    @default(true)
+  lastScraped     DateTime?
+  properties      Property[]
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+}
+
+model ScrapeLog {
+  id              String   @id @default(cuid())
+  searchId        String?
+  status          String
+  propertiesFound Int      @default(0)
+  newProperties   Int      @default(0)
+  phase1Passed    Int      @default(0)
+  phase2Passed    Int      @default(0)
+  phase3Passed    Int      @default(0)
+  error           String?
+  duration        Int?
+  createdAt       DateTime @default(now())
+}
+
+// ═══════════════════════════════════════════
+// SAAS — Multi-Tenancy
+// ═══════════════════════════════════════════
+
+model Tenant {
+  id                    String   @id @default(cuid())
+  name                  String
+  email                 String   @unique
+  passwordHash          String?
+  plan                  String   @default("free")
+  stripeCustomerId      String?
+  stripeSubscriptionId  String?
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+}

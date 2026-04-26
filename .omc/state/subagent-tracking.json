@@ -1,0 +1,71 @@
+{
+  "agents": [
+    {
+      "agent_id": "a16922c2d4dab8fe2",
+      "agent_type": "Explore",
+      "started_at": "2026-04-26T08:27:41.830Z",
+      "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-04-26T08:50:47.289Z",
+      "duration_ms": 1385459
+    },
+    {
+      "agent_id": "ab385b2e00aaa9096",
+      "agent_type": "oh-my-claudecode:planner",
+      "started_at": "2026-04-26T10:45:11.704Z",
+      "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-04-26T11:03:38.275Z",
+      "duration_ms": 1106571
+    },
+    {
+      "agent_id": "a6a87c7e174c04883",
+      "agent_type": "oh-my-claudecode:architect",
+      "started_at": "2026-04-26T11:10:12.193Z",
+      "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-04-26T11:14:03.233Z",
+      "duration_ms": 231040
+    },
+    {
+      "agent_id": "a8805f5731c34fa1d",
+      "agent_type": "oh-my-claudecode:critic",
+      "started_at": "2026-04-26T11:14:45.552Z",
+      "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-04-26T11:19:02.033Z",
+      "duration_ms": 256481
+    },
+    {
+      "agent_id": "a24891b8b93d51e00",
+      "agent_type": "oh-my-claudecode:planner",
+      "started_at": "2026-04-26T11:19:53.784Z",
+      "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-04-26T11:35:10.006Z",
+      "duration_ms": 916222
+    },
+    {
+      "agent_id": "a0e7deaa63695405f",
+      "agent_type": "oh-my-claudecode:architect",
+      "started_at": "2026-04-26T11:39:56.665Z",
+      "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-04-26T11:41:59.388Z",
+      "duration_ms": 122723
+    },
+    {
+      "agent_id": "a018ed5b3abf12e07",
+      "agent_type": "oh-my-claudecode:critic",
+      "started_at": "2026-04-26T11:42:30.324Z",
+      "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-04-26T11:44:21.346Z",
+      "duration_ms": 111022
+    }
+  ],
+  "total_spawned": 7,
+  "total_completed": 7,
+  "total_failed": 0,
+  "last_updated": "2026-04-26T11:44:21.448Z"
+}

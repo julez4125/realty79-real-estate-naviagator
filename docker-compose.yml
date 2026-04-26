@@ -1,0 +1,26 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: realty79-postgres
+    ports:
+      - '5433:5432'
+    environment:
+      POSTGRES_USER: realty79
+      POSTGRES_PASSWORD: realty79dev
+      POSTGRES_DB: realty79
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    container_name: realty79-redis
+    ports:
+      - '6380:6379'
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  redis_data:
