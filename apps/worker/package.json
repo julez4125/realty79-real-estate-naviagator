@@ -1,9 +1,9 @@
 {
-  "name": "@org/api",
+  "name": "@org/worker",
   "version": "0.0.1",
   "private": true,
   "nx": {
-    "name": "api",
+    "name": "worker",
     "targets": {
       "build": {
         "executor": "nx:run-commands",
@@ -12,7 +12,7 @@
           "args": [
             "--node-env=production"
           ],
-          "cwd": "apps/api"
+          "cwd": "apps/worker"
         },
         "configurations": {
           "development": {
@@ -29,8 +29,8 @@
         "cache": true,
         "executor": "@nx/js:prune-lockfile",
         "outputs": [
-          "{workspaceRoot}/apps/api/dist/package.json",
-          "{workspaceRoot}/apps/api/dist/package-lock.json"
+          "{workspaceRoot}/apps/worker/dist/package.json",
+          "{workspaceRoot}/apps/worker/dist/package-lock.json"
         ],
         "options": {
           "buildTarget": "build"
@@ -42,7 +42,7 @@
         ],
         "cache": true,
         "outputs": [
-          "{workspaceRoot}/apps/api/dist/workspace_modules"
+          "{workspaceRoot}/apps/worker/dist/workspace_modules"
         ],
         "executor": "@nx/js:copy-workspace-modules",
         "options": {
@@ -64,39 +64,31 @@
           "build"
         ],
         "options": {
-          "buildTarget": "api:build",
+          "buildTarget": "worker:build",
           "runBuildTargetDependencies": false
         },
         "configurations": {
           "development": {
-            "buildTarget": "api:build:development"
+            "buildTarget": "worker:build:development"
           },
           "production": {
-            "buildTarget": "api:build:production"
+            "buildTarget": "worker:build:production"
           }
         }
       }
     },
     "tags": [
-      "scope:api"
+      "scope:worker"
     ]
   },
   "dependencies": {
     "@nestjs/common": "^11.0.0",
     "@nestjs/core": "^11.0.0",
-    "@nestjs/jwt": "^10.2.0",
-    "@nestjs/passport": "^11.0.0",
-    "@nestjs/platform-express": "^11.0.0",
-    "bcrypt": "^5.1.1",
-    "passport": "^0.7.0",
-    "passport-jwt": "^4.0.1",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.0",
     "tslib": "^2.3.0"
   },
   "devDependencies": {
-    "@nestjs/testing": "^11.0.0",
-    "@types/bcrypt": "^5.0.2",
-    "@types/passport-jwt": "^4.0.1"
+    "@nestjs/testing": "^11.0.0"
   }
 }

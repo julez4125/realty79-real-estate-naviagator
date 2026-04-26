@@ -2,18 +2,6 @@ const { NxAppWebpackPlugin } = require('@nx/webpack/app-plugin');
 const { join } = require('path');
 
 module.exports = {
-  // Externalize bcrypt explicitly so webpack never tries to resolve it from disk.
-  // bcrypt is a native module that must be present in node_modules at runtime
-  // (installed via `pnpm install`). This entry is merged with NxAppWebpackPlugin's
-  // own node_modules externalisation via mergeExternals: true.
-  externals: [
-    function ({ request }, callback) {
-      if (request === 'bcrypt') {
-        return callback(null, 'commonjs bcrypt');
-      }
-      callback();
-    },
-  ],
   output: {
     path: join(__dirname, 'dist'),
     clean: true,
@@ -27,13 +15,10 @@ module.exports = {
       compiler: 'tsc',
       main: './src/main.ts',
       tsConfig: './tsconfig.app.json',
-      assets: ['./src/assets'],
       optimization: false,
       outputHashing: 'none',
       generatePackageJson: false,
       sourceMap: true,
-      mergeExternals: true,
-      externalDependencies: 'all',
     }),
   ],
 };

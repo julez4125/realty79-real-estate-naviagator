@@ -1,8 +1,25 @@
 import { Module } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import { JwtModule } from '@nestjs/jwt';
+import { PassportModule } from '@nestjs/passport';
+import { AuthController } from './auth.controller';
+import { AuthService } from './auth.service';
+import { JwtAuthGuard } from './jwt-auth.guard';
+import { JwtStrategy } from './jwt.strategy';
 
-/**
- * AuthModule — scaffold (M0). Real wiring lands in subsequent milestones per
- * /opt/realty79-real-estate-naviagator/.omc/plans/realty79-scout-mvp-consensus-iter2.md
- */
-@Module({})
+@Module({
+  imports: [
+    PassportModule,
+    JwtModule.registerAsync({
+      inject: [ConfigService],
+      useFactory: (config: ConfigService) => ({
+        secret: config.get<string>('JWT_SECRET') ?? 'changeme',
+        signOptions: { expiresIn: '15m' },
+      }),
+    }),
+  ],
+  controllers: [AuthController],
+  providers: [AuthService, JwtStrategy, JwtAuthGuard],
+  exports: [AuthService, JwtAuthGuard],
+})
 export class AuthModule {}
